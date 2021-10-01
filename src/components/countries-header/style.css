@@ -1,0 +1,16 @@
+.countries-header {
+    display: flex;
+    flex: 0;
+}
+
+.countries-header .btn {
+    font-size: 22px;
+    margin-left: 10px;
+    line-height: 40px;
+}
+
+.countries-header .searchInput {
+    flex: 1;
+    font-size: 16px;
+    line-height: 40px;
+}

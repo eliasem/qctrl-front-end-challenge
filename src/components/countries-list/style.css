@@ -1,0 +1,7 @@
+.countries-list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+}

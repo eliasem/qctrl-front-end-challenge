@@ -1,0 +1,39 @@
+.country {
+    position: absolute;
+    background: white;
+    height: calc(100vh - 40px);
+    display: flex;
+    padding: 0 20px;
+    flex-direction: column;
+    width: calc(100% - 40px);
+}
+
+.country .content {
+    margin: 60px auto;
+    width: 75%;
+}
+
+.country img {
+    max-width: 100%;
+    min-height: 218px;
+}
+
+.country .btn {
+    font-size: 22px;
+    line-height: 40px;
+    width: 200px;
+}
+
+.country .name-official {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 22px;
+}
+
+.country .name-common {
+    font-size: 18px;
+}
+
+.country .data-list {
+    padding: 40px 0;
+}

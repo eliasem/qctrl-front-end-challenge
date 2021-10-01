@@ -1,0 +1,15 @@
+.countries-list-row {
+    align-items: center;
+    border: 1px solid;
+    border-bottom: none;
+    cursor: pointer;
+    display: flex;
+    height: 55px;
+    padding: 0 2px;
+    text-align: left;
+    width: 100%;
+}
+
+.countries-list-row:last-child {
+    border-bottom: 1px solid black;
+}
