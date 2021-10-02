@@ -3,12 +3,13 @@ import CountryDataRow from '../country-data-row';
 import './style.css';
 
 interface IProps {
-    data: Country;
+    data?: Country;
     onClose: () => void;
 }
 
-export default function Countries({data, onClose}: IProps) {
-    return (
+export default function Country({data, onClose}: IProps) {
+
+    return data ? (
         <div className="country">
             <button className="btn" onClick={onClose}>Close</button>
             <div className="content">
@@ -21,5 +22,5 @@ export default function Countries({data, onClose}: IProps) {
                 </div>
             </div>
         </div>
-    );
+    ): null;
 }

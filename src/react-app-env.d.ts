@@ -1,6 +1,11 @@
 /// <reference types="react-scripts" />
 
-interface Country {
+interface Countries {
+    id: string;
+    displayName: string;
+}
+
+interface CountryApi {
     flags: string[];
     name: {
         common: string;
@@ -17,4 +22,8 @@ interface Country {
     };
     flag: string;
     population: number;
+}
+
+interface Country extends CountryApi{
+    id: string;
 }

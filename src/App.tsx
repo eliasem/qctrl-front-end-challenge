@@ -40,8 +40,8 @@ function App() {
             // I'm not sure why the server wont return the response as a json
             .then((response):Promise<string> => response.text())
             // so I'm converting to a json here
-            .then((text):Promise<Country[]> => JSON.parse(text))
-            .then((countries: Country[]) => {
+            .then((text):Promise<CountryApi[]> => JSON.parse(text))
+            .then((countries: CountryApi[]) => {
                 setAllCountries(
                     countries
                         .map((c) => ({...c, id: c.name.official.replaceAll(' ', '_')}))
@@ -87,6 +87,10 @@ function App() {
     React.useEffect(() => {
         if(!selectedCountry) { return; }
 
+        const countryData = allCountries.find(({id}) => id === selectedCountry);
+
+        if(!countryData) { return; }
+
         /*
         * Cache the image in the browser to reduce Content Layout shift
         * */
@@ -96,8 +100,8 @@ function App() {
             setSelectedCountryLoading(false);
         };
 
-        img.src = allCountries.find(({id}) => id === selectedCountry).flags[0];
-    }, [selectedCountry])
+        img.src = countryData.flags[0];
+    }, [selectedCountry]);
 
     return (
         <div className="App">
