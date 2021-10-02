@@ -3,7 +3,7 @@ import './style.css';
 
 interface IProps {
     label: string;
-    value: string;
+    value?: string;
 }
 
 export default function Countries({label, value}: IProps) {

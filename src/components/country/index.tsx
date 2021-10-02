@@ -17,7 +17,7 @@ export default function Countries({data, onClose}: IProps) {
                 <div className="name-common">({data.name.common})</div>
                 <div className="data-list">
                     <CountryDataRow label="Population" value={data.population.toString()} />
-                    <CountryDataRow label="Demonym" value={data.demonyms.eng.m} />
+                    <CountryDataRow label="Demonym" value={data.demonyms.eng?.m} />
                 </div>
             </div>
         </div>
