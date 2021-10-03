@@ -101,7 +101,7 @@ function App() {
         };
 
         img.src = countryData.flags[0];
-    }, [selectedCountry]);
+    }, [allCountries, selectedCountry]);
 
     return (
         <div className="App">

@@ -13,7 +13,7 @@ export default function Country({data, onClose}: IProps) {
         <div className="country">
             <button className="btn" onClick={onClose}>Close</button>
             <div className="content">
-                <img src={data.flags[0]} />
+                <img src={data.flags[0]} alt={`${data.name.official} flag`}/>
                 <div className="name-official">{data.name.official}</div>
                 <div className="name-common">({data.name.common})</div>
                 <div className="data-list">
