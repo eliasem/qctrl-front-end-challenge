@@ -1,4 +1,6 @@
 import React from 'react';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import Countries from './components/countries';
 import CountriesFooter from './components/countries-footer';
 import CountriesHeader from './components/countries-header';
@@ -35,29 +37,33 @@ function App() {
     const [isSelectedCountryLoading, setSelectedCountryLoading] = React.useState<boolean>(true);
     const [selectedCountry, setSelectedCountry] = React.useState<string>('');
 
-    React.useEffect(() => {
+    const countriesData$:Observable<CountryApi[]> = new Observable((observer) => {
         fetch("https://restcountries.com/v3/all?fields=name,population,demonyms,flags,flag")
             // I'm not sure why the server wont return the response as a json
             .then((response):Promise<string> => response.text())
-            // so I'm converting to a json here
             .then((text):Promise<CountryApi[]> => JSON.parse(text))
             .then((countries: CountryApi[]) => {
-                setAllCountries(
-                    countries
-                        .map((c) => ({...c, id: c.name.official.replaceAll(' ', '_')}))
-                        /*
-                        * Normally wouldn't sort on large objects like this because it creates a temporary
-                        * country object every time.
-                        *
-                        * Would prefer to pick the property into an array and sort that instead. Then do a look up
-                        * to generate the list.
-                        *
-                        * Even more preferably, the rest api already gives us the data sorted :D
-                        * */
-                        .sort((a, b) => a.name.official.toLowerCase().localeCompare(b.name.official.toLowerCase()))
-                );
-                setIsLoading(false);
-            });
+                observer.next(countries);
+                observer.complete();
+            })
+            .catch(err => observer.error(err));
+    });
+
+    const c$:Observable<Country[]> = countriesData$.pipe(
+        map((countries) => countries.map(({name, ...countryData}):Country => ({
+                    ...countryData,
+                    name,
+                    id: name.official.replaceAll(' ', '_')
+                }))
+                .sort((a:Country, b: Country) => a.name.official.toLowerCase().localeCompare(b.name.official.toLowerCase()))
+        ),
+    );
+
+    React.useEffect(() => {
+        c$.subscribe((data) => {
+            setAllCountries(data);
+            setIsLoading(false);
+        });
 
     }, []);
 
